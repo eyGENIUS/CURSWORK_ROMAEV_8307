@@ -1,0 +1,33 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "file_lib.h"
+#include "Search_lib.h"
+#include "menu_lib.h"
+#include "sort_lib.h"
+
+int main()
+{
+    FILE *info = fopen("INFOC.csv", "r");
+    FILE *otvet = fopen("otvet.txt", "w");
+    List *list = makeList();
+    read(info, list);
+    fclose(info);
+
+    menu(list);
+
+    printf("Do you want to save your list in file otvet?");
+    printf("\n1 - yes\n2 - no\nYour choice: ");
+    int x;
+    scanf("%d", &x);
+    if (x == 1){
+        save(list,otvet);
+        printf("file saved!\n");
+    }
+
+    end(list);
+    fclose(otvet);
+
+    printf("\n!!!!!!Thanks for using my program!!!!!");
+
+    return 0;
+}
